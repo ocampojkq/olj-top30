@@ -28,7 +28,7 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(true);
 
   const stats = [
-    { label: "Jobs Scraped", value: "5000+", icon: "🔍" },
+    { label: "Jobs Scraped", value: "June 2026", icon: "🔍" },
     { label: "Top Job Titles", value: "30", icon: "📊" },
     { label: "Auto-Updated", value: "Daily", icon: "🔄" },
     { label: "Duplicates Removed", value: "✓", icon: "🧹" },
@@ -74,7 +74,7 @@ export default function App() {
           >
             Built an n8n workflow that scrapes OnlineJobs.ph daily, removes
             duplicates, and saves to Google Sheets. A separate workflow analyzes
-            800+ job postings and generates a Top 30 in-demand job titles
+            June 2026 job postings and generates a Top 30 in-demand job titles
             report.
           </p>
         </div>
