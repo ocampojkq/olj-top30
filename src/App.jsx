@@ -50,7 +50,7 @@ export default function App() {
         <h1 className="text-xl font-bold text-blue-500">OLJ Job Analyzer</h1>
         <div className="flex items-center gap-4">
           <a
-            href="https://kit-job-dashboard.netlify.app"
+            href="https://va-job-hub.netlify.app"
             target="_blank"
             rel="noreferrer"
             className="text-sm font-medium text-blue-500 hover:text-blue-400 transition"
