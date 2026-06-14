@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useTop30 from "./hooks/useTop30";
+import useTop100 from "./hooks/useTop100";
 import {
   BarChart,
   Bar,
@@ -24,12 +25,22 @@ const COLORS = [
 ];
 
 export default function App() {
-  const data = useTop30();
+  const top30Data = useTop30();
+  const top100Data = useTop100();
   const [darkMode, setDarkMode] = useState(true);
+  const [activeTab, setActiveTab] = useState("top30");
+
+  const data = activeTab === "top30" ? top30Data : top100Data;
+  const chartHeight = activeTab === "top30" ? 800 : 2000;
+  const domainMax = activeTab === "top30" ? 100 : 100;
 
   const stats = [
     { label: "Jobs Scraped", value: "June 2026", icon: "🔍" },
-    { label: "Top Job Titles", value: "30", icon: "📊" },
+    {
+      label: "Top Job Titles",
+      value: activeTab === "top30" ? "30" : "100",
+      icon: "📊",
+    },
     { label: "Auto-Updated", value: "Daily", icon: "🔄" },
     { label: "Duplicates Removed", value: "✓", icon: "🧹" },
   ];
@@ -44,14 +55,13 @@ export default function App() {
       >
         <h1 className="text-xl font-bold text-blue-500">OLJ Job Analyzer</h1>
         <div className="flex items-center gap-4">
-          {/* FIXED: Restored missing <a tag element definition */}
           <a
             href="https://kit-job-dashboard.netlify.app"
             target="_blank"
             rel="noreferrer"
             className="text-sm font-medium text-blue-500 hover:text-blue-400 transition"
           >
-            VA Job Hub
+            VA Job Hub ↗
           </a>
           <button
             onClick={() => setDarkMode(!darkMode)}
@@ -67,16 +77,43 @@ export default function App() {
         <div className="text-center mb-10 mt-6">
           <h2 className="text-4xl font-bold mb-3">
             OLJ Job Scraper &{" "}
-            <span className="text-blue-500">Top 30 Analysis</span>
+            <span className="text-blue-500">Job Analysis</span>
           </h2>
           <p
             className={`text-lg max-w-2xl mx-auto ${darkMode ? "text-gray-400" : "text-gray-600"}`}
           >
             Built an n8n workflow that scrapes OnlineJobs.ph daily, removes
-            duplicates, and saves to Google Sheets. A separate workflow analyzes
-            June 2026 job postings and generates a Top 30 in-demand job titles
-            report.
+            duplicates, and saves to Google Sheets. Analyzes Start June 2026 job
+            postings and generates in-demand job titles report.
           </p>
+        </div>
+
+        {/* Tab Switcher */}
+        <div className="flex justify-center gap-3 mb-8">
+          <button
+            onClick={() => setActiveTab("top30")}
+            className={`px-6 py-2 rounded-lg font-semibold transition ${
+              activeTab === "top30"
+                ? "bg-blue-600 text-white"
+                : darkMode
+                  ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                  : "bg-white text-gray-700 border hover:bg-gray-50"
+            }`}
+          >
+            🏆 Top 30
+          </button>
+          <button
+            onClick={() => setActiveTab("top100")}
+            className={`px-6 py-2 rounded-lg font-semibold transition ${
+              activeTab === "top100"
+                ? "bg-blue-600 text-white"
+                : darkMode
+                  ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                  : "bg-white text-gray-700 border hover:bg-gray-50"
+            }`}
+          >
+            📊 Top 100
+          </button>
         </div>
 
         {/* Stats Cards */}
@@ -104,7 +141,8 @@ export default function App() {
           className={`rounded-xl p-6 border mb-10 overflow-x-auto ${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-slate-200 shadow-sm"}`}
         >
           <h3 className="text-xl font-bold mb-6">
-            Top 30 Most In-Demand VA Job Titles
+            {activeTab === "top30" ? "Top 30" : "Top 100"} Most In-Demand VA Job
+            Titles
           </h3>
           {data.length === 0 ? (
             <div className="text-center text-gray-400 py-10">
@@ -112,16 +150,17 @@ export default function App() {
             </div>
           ) : (
             <div style={{ minWidth: "500px" }}>
-              <ResponsiveContainer width="100%" height={800}>
+              <ResponsiveContainer width="100%" height={chartHeight}>
                 <BarChart
                   data={data}
                   layout="vertical"
                   margin={{ left: 10, right: 20, top: 10, bottom: 10 }}
+                  barSize={12}
                 >
                   <XAxis
                     type="number"
                     stroke={darkMode ? "#9ca3af" : "#6b7280"}
-                    domain={[0, 50]}
+                    domain={[0, domainMax]}
                   />
                   <YAxis
                     type="category"
