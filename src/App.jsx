@@ -27,8 +27,13 @@ export default function App() {
   const data = useTop100();
   const [darkMode, setDarkMode] = useState(true);
 
+  const monthYear = new Date().toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+
   const stats = [
-    { label: "Jobs Scraped", value: "June 2026", icon: "🔍" },
+    { label: "Jobs Scraped", value: monthYear, icon: "🔍" },
     { label: "Top Job Titles", value: "100", icon: "📊" },
     { label: "Auto-Updated", value: "Daily", icon: "🔄" },
     { label: "Duplicates Removed", value: "✓", icon: "🧹" },
