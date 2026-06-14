@@ -31,7 +31,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("top30");
 
   const data = activeTab === "top30" ? top30Data : top100Data;
-  const chartHeight = activeTab === "top30" ? 800 : 2000;
+  const chartHeight = 800;
   const domainMax = activeTab === "top30" ? 100 : 100;
 
   const stats = [
@@ -155,7 +155,7 @@ export default function App() {
                   data={data}
                   layout="vertical"
                   margin={{ left: 10, right: 20, top: 10, bottom: 10 }}
-                  barSize={12}
+                  barSize={30}
                 >
                   <XAxis
                     type="number"
@@ -168,7 +168,7 @@ export default function App() {
                     width={160}
                     stroke={darkMode ? "#9ca3af" : "#6b7280"}
                     tick={{
-                      fontSize: 11,
+                      fontSize: 14,
                       fill: darkMode ? "#d1d5db" : "#374151",
                     }}
                   />
