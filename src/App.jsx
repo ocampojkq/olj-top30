@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
+import useJobCount from "./hooks/useJobCount";
 
 const COLORS = [
   "#2563eb",
@@ -31,12 +32,12 @@ export default function App() {
     month: "long",
     year: "numeric",
   });
-
+  const jobCount = useJobCount();
   const stats = [
     { label: "Jobs Scraped", value: monthYear, icon: "🔍" },
+    { label: "Active Listings", value: jobCount.toLocaleString(), icon: "💼" },
     { label: "Top Job Titles", value: "100", icon: "📊" },
     { label: "Auto-Updated", value: "Daily", icon: "🔄" },
-    { label: "Duplicates Removed", value: "✓", icon: "🧹" },
   ];
 
   return (
