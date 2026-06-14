@@ -77,7 +77,7 @@ export default function App() {
             className={`text-lg max-w-2xl mx-auto ${darkMode ? "text-gray-400" : "text-gray-600"}`}
           >
             Built an n8n workflow that scrapes OnlineJobs.ph daily, removes
-            duplicates, and saves to Google Sheets. Analyzes June 2026 job
+            duplicates, and saves to Google Sheets. Analyzes monthly job job
             postings and generates Top 100 in-demand job titles report.
           </p>
         </div>
