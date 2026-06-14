@@ -56,7 +56,7 @@ export default function App() {
             rel="noreferrer"
             className="text-sm font-medium text-blue-500 hover:text-blue-400 transition"
           >
-            VA Job Hub ↗
+            VA Job Hub
           </a>
           <button
             onClick={() => setDarkMode(!darkMode)}
