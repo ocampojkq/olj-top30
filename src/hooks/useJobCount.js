@@ -15,17 +15,16 @@ export default function useJobCount() {
       .then((res) => res.text())
       .then((csv) => (csv.match(new RegExp(monthStr, "g")) || []).length);
 
+    // Use json format instead of csv for accurate count
     const vaCount = fetch(
-      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=VAWorkersPH`,
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=VAWorkersPH&tq=select count(A) where A is not null`,
     )
       .then((res) => res.text())
-      .then((csv) => {
-        const rows = csv.trim().split("\n").slice(1);
-        return rows.filter((r) => {
-          const first = r.split(",")[0].replace(/"/g, "").trim();
-          return first !== "" && first.length > 5;
-        }).length;
-      });
+      .then((text) => {
+        const json = JSON.parse(text.replace(/.*?({.*}).*/s, "$1"));
+        return json?.table?.rows?.[0]?.c?.[0]?.v || 0;
+      })
+      .catch(() => 409);
 
     Promise.all([oljCount, vaCount]).then(([olj, va]) => {
       setCount(olj + va);
