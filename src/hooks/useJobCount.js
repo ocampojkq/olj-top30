@@ -21,7 +21,10 @@ export default function useJobCount() {
       .then((res) => res.text())
       .then((csv) => {
         const rows = csv.trim().split("\n").slice(1);
-        return rows.filter((r) => r.trim() !== "").length;
+        return rows.filter((r) => {
+          const first = r.split(",")[0].replace(/"/g, "").trim();
+          return first !== "" && first.length > 5;
+        }).length;
       });
 
     Promise.all([oljCount, vaCount]).then(([olj, va]) => {
