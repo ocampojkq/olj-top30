@@ -25,7 +25,8 @@ export default function useJobCount() {
         const rows = csv.trim().split("\n").slice(1);
         return rows.filter((r) => {
           const cols = r.split(",");
-          const dateStr = cols[3]?.replace(/"/g, "").trim();
+          // created_at is index 9
+          const dateStr = cols[9]?.replace(/"/g, "").trim();
           if (!dateStr) return false;
           const date = new Date(dateStr);
           return (
