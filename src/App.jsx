@@ -56,6 +56,7 @@ export default function App() {
             VA
           </span>
         </h1>
+
         <div className="flex items-center gap-4">
           <a
             href="https://va-job-hub.netlify.app"
