@@ -78,8 +78,7 @@ export default function App() {
         {/* Hero */}
         <div className="text-center mb-10 mt-6">
           <h2 className="text-4xl font-bold mb-3">
-            OLJ Job Scraper &{" "}
-            <span className="text-blue-500">Top 100 Analysis</span>
+            VA Job Hub & <span className="text-blue-500">Top 100 Analysis</span>
           </h2>
           <p
             className={`text-lg max-w-2xl mx-auto ${darkMode ? "text-gray-400" : "text-gray-600"}`}
