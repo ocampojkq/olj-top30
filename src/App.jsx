@@ -48,7 +48,7 @@ export default function App() {
       <nav
         className={`shadow-md px-6 py-4 flex justify-between items-center ${darkMode ? "bg-gray-800" : "bg-white"}`}
       >
-        <h1 className="text-xl font-bold text-blue-500">OLJ Job Analyzer</h1>
+        <h1 className="text-xl font-bold text-blue-500">VA Job Hub Analyzer</h1>
         <div className="flex items-center gap-4">
           <a
             href="https://va-job-hub.netlify.app"
